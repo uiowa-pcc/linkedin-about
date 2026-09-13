@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A guided LinkedIn About section drafting tool for students.">
+<title>Build My LinkedIn About Section</title>
+<style>
+:root{
+  --gold:#ffcd00;
+  --ink:#151515;
+  --muted:#59626b;
+  --line:#d5d7da;
+  --soft:#f3f4f5;
+  --green:#176b48;
+  --blue:#164f86;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  color:var(--ink);
+  background:var(--white);
+  font:16px/1.5 Arial,Helvetica,sans-serif;
+}
+button,a,input,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,[contenteditable]:focus-visible{
+  outline:3px solid #92bee6;
+  outline-offset:2px;
+}
+.app{
+  max-width:920px;
+  margin:auto;
+  padding:34px 20px 56px;
+}
+h1{
+  margin:0;
+  font-size:clamp(2rem,5vw,3rem);
+  line-height:1.05;
+  letter-spacing:-.03em;
+}
+.intro{
+  max-width:760px;
+  margin:11px 0 24px;
+  color:var(--muted);
+  font-size:1.05rem;
+}
+.start-note{
+  margin:0 0 24px;
+  padding:14px 16px;
+  border-left:6px solid var(--gold);
+  background:#fff9d8;
+}
+.start-note strong{display:block;margin-bottom:2px}
+
+.progress-wrap{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+.progress{
+  flex:1;
+  max-width:540px;
+  height:10px;
+  background:#e5e7e9;
+  border-radius:999px;
+  overflow:hidden;
+}
+.progress span{
+  display:block;
+  width:33.333%;
+  height:100%;
+  background:var(--green);
+  transition:.2s;
+}
+.progress-text{
+  font-size:.9rem;
+  font-weight:700;
+}
+
+.card{
+  border:1px solid #c9ccd0;
+  border-top:8px solid var(--gold);
+  border-radius:7px;
+  padding:24px;
+  box-shadow:0 10px 28px #00000010;
+}
+.step{display:none}
+.step.active{display:block}
+.step-label{
+  margin:0 0 5px;
+  color:var(--muted);
+  font-size:.82rem;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+h2{
+  margin:0 0 7px;
+  font-size:1.45rem;
+  line-height:1.25;
+}
+.helper{
+  margin:0 0 18px;
+  color:var(--muted);
+}
+label{
+  display:block;
+  margin:18px 0 6px;
+  font-weight:800;
+}
+textarea,input[type=text]{
+  width:100%;
+  border:2px solid #b8bdc2;
+  border-radius:5px;
+  padding:11px 12px;
+  background:#fff;
+  color:var(--ink);
+}
+textarea{
+  min-height:118px;
+  resize:vertical;
+}
+input[type=text]{min-height:46px}
+.hint{
+  color:var(--muted);
+  font-size:.86rem;
+  font-weight:400;
+}
+.idea-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:9px;
+}
+.idea{
+  border:1px solid #999;
+  border-radius:999px;
+  padding:5px 9px;
+  background:#fff;
+  color:#333;
+  font-size:.82rem;
+}
+.tip{
+  margin-top:14px;
+  padding:11px 13px;
+  background:var(--soft);
+  border-radius:5px;
+  color:#444;
+  font-size:.9rem;
+}
+.actions{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:24px;
+}
+.btn{
+  min-height:44px;
+  padding:9px 15px;
+  border:2px solid #111;
+  border-radius:4px;
+  background:#fff;
+  color:#111;
+  font-weight:800;
+}
+.btn.primary{background:var(--gold)}
+.btn.dark{background:#111;color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.output-wrap{
+  margin-top:18px;
+}
+.output-label{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:7px;
+}
+.output-label strong{font-size:1rem}
+.output{
+  min-height:180px;
+  padding:16px;
+  border:2px solid #111;
+  border-radius:5px;
+  background:#fff;
+  white-space:pre-wrap;
+}
+.output.empty{
+  color:var(--muted);
+  border-color:#b8bdc2;
+}
+.check{
+  margin-top:18px;
+  padding:15px;
+  background:var(--soft);
+  border-radius:6px;
+}
+.check h3{
+  margin:0 0 9px;
+  font-size:1.05rem;
+}
+.check ul{
+  margin:0;
+  padding-left:20px;
+}
+.check li{margin:4px 0}
+.ai-box{
+  margin-top:22px;
+  border:2px solid #111;
+  border-radius:6px;
+  overflow:hidden;
+}
+.ai-head{
+  padding:13px 15px;
+  background:#111;
+  color:#fff;
+}
+.ai-head strong{display:block}
+.ai-head span{font-size:.88rem}
+.ai-body{padding:16px}
+.ai-body p{margin:0 0 12px}
+.ai-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.ai-actions .btn{text-decoration:none}
+.status{
+  min-height:22px;
+  margin-top:8px;
+  color:var(--green);
+  font-size:.88rem;
+  font-weight:800;
+}
+.small{
+  margin-top:14px;
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+.story-choices{
+  border:0;
+  padding:0;
+  margin:18px 0 0;
+}
+.story-choices legend{
+  font-weight:800;
+  margin-bottom:8px;
+}
+.story-choice{
+  display:flex;
+  gap:11px;
+  align-items:flex-start;
+  margin:8px 0;
+  padding:13px 14px;
+  border:2px solid var(--line);
+  border-radius:6px;
+  cursor:pointer;
+  background:#fff;
+}
+.story-choice:has(input:checked){
+  border-color:#111;
+  background:#fff9d8;
+}
+.story-choice input{
+  margin-top:4px;
+  transform:scale(1.15);
+}
+.story-choice strong{
+  display:block;
+  margin-bottom:2px;
+}
+.story-choice small{
+  display:block;
+  color:var(--muted);
+  font-size:.88rem;
+  line-height:1.4;
+}
+.prompt-card{
+  margin:12px 0;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:#fff;
+}
+.prompt-card label{
+  margin-top:0;
+}
+.prompt-card.recommended{
+  border-left:6px solid var(--gold);
+  background:#fffdf1;
+}
+
+@media(max-width:600px){
+  .app{padding:25px 14px 44px}
+  .card{padding:18px}
+  .actions .btn,.ai-actions .btn{width:100%}
+  .output-label{align-items:flex-start;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <h1>Build My LinkedIn About Section</h1>
+  <p class="intro">Use the prompts that help you tell your story. Your About section can focus on what has shaped you professionally, where you want to go, or both.</p>
+
+  <div class="start-note">
+    <strong>You do not need to complete every prompt.</strong>
+    Choose the pieces that help someone understand something meaningful about you professionally. One strong idea developed with detail is better than trying to include everything.
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress" role="progressbar" aria-label="Activity progress" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1"><span id="bar"></span></div>
+    <span class="progress-text" id="progressText">1 of 3</span>
+  </div>
+
+  <section class="card">
+
+    <div class="step active" data-step="1">
+      <p class="step-label">Step 1 · Choose your story</p>
+      <h2>What story do you want your About section to tell?</h2>
+      <p class="helper">Your About section does not need to cover your whole background. Start with the direction that feels most useful right now.</p>
+
+      <fieldset class="story-choices">
+        <legend>Choose one starting point</legend>
+        <label class="story-choice">
+          <input type="radio" name="storyPath" value="shaped">
+          <span>
+            <strong>What has shaped me professionally</strong>
+            <small>An experience, challenge, responsibility, interest, or turning point that influenced how you work or what matters to you.</small>
+          </span>
+        </label>
+        <label class="story-choice">
+          <input type="radio" name="storyPath" value="future">
+          <span>
+            <strong>Where I want to go professionally</strong>
+            <small>The work, problems, people, field, or impact you want to move toward—even if you are still exploring.</small>
+          </span>
+        </label>
+        <label class="story-choice">
+          <input type="radio" name="storyPath" value="both">
+          <span>
+            <strong>A little of both</strong>
+            <small>Connect something that has shaped you with the direction you want to keep exploring.</small>
+          </span>
+        </label>
+      </fieldset>
+
+      <div class="tip"><strong>No perfect answer:</strong> this choice only helps organize your thinking. You can change direction while you draft.</div>
+
+      <div class="actions">
+        <span></span>
+        <button class="btn primary next" type="button">Next</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="2">
+      <p class="step-label">Step 2 · Build the story</p>
+      <h2>Use only the prompts that help</h2>
+      <p class="helper">You can answer several briefly or choose one or two and go deeper. The goal is enough detail to sound specific and genuine.</p>
+
+      <div class="prompt-card" data-path="all shaped">
+        <label for="shaped">What experience, responsibility, interest, or moment has shaped you professionally? <span class="hint">Optional</span></label>
+        <textarea id="shaped" placeholder="What happened, what did you take from it, or how did it influence the way you think about work?"></textarea>
+      </div>
+
+      <div class="prompt-card" data-path="all future">
+        <label for="future">What kind of work, problem, field, people, or impact do you want to move toward? <span class="hint">Optional</span></label>
+        <textarea id="future" placeholder="You can name a specific direction or describe the kind of work you want to explore."></textarea>
+      </div>
+
+      <div class="prompt-card" data-path="all">
+        <label for="evidence">What is one example that shows what you bring? <span class="hint">Optional</span></label>
+        <textarea id="evidence" placeholder="A job, class, project, internship, research experience, leadership role, volunteer experience, or accomplishment."></textarea>
+      </div>
+
+      <div class="prompt-card" data-path="all">
+        <label for="skills">What strengths, skills, tools, or knowledge are worth mentioning? <span class="hint">Optional</span></label>
+        <input id="skills" type="text" placeholder="Example: research, relationship building, data analysis">
+      </div>
+
+      <div class="prompt-card" data-path="all">
+        <label for="why">What matters to you about this work? <span class="hint">Optional</span></label>
+        <textarea id="why" placeholder="What keeps your attention, motivates you, or makes this work meaningful to you?"></textarea>
+      </div>
+
+      <div class="tip"><strong>Try not to fill space just because a box is here.</strong> If one experience or direction tells your story well, give that more detail and leave the rest blank.</div>
+
+      <div class="actions">
+        <button class="btn back" type="button">Back</button>
+        <button class="btn primary" id="buildBtn" type="button">Build my draft</button>
+      </div>
+    </div>
+
+    <div class="step" data-step="3">
+      <p class="step-label">Step 3 · Make it yours</p>
+      <h2>Shape your starting draft</h2>
+      <p class="helper">Use this as a starting point. Keep the parts that tell your story well, expand what matters, and remove anything that feels unnecessary or unlike you.</p>
+
+      <div class="output-wrap">
+        <div class="output-label">
+          <strong>My About draft</strong>
+          <button class="btn" id="copyDraft" type="button">Copy draft</button>
+        </div>
+        <div id="draft" class="output" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Editable LinkedIn About draft"></div>
+      </div>
+
+      <div class="check">
+        <h3>Before you use it, check:</h3>
+        <ul>
+          <li>Does this sound like me?</li>
+          <li>Is there one clear professional story or direction running through it?</li>
+          <li>Did I include enough detail to make that story specific?</li>
+          <li>Am I adding context instead of repeating my resume?</li>
+          <li>Is every detail accurate?</li>
+        </ul>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-head">
+          <strong>Want help polishing it?</strong>
+          <span>Use Copilot as an editor—not as the source of your story.</span>
+        </div>
+        <div class="ai-body">
+          <p>Copy a ready-to-paste prompt that includes your current draft and asks Copilot to improve clarity while keeping your meaning and voice.</p>
+          <div class="ai-actions">
+            <button class="btn primary" id="copyCopilot" type="button">Copy prompt for Copilot</button>
+            <a class="btn" href="https://copilot.microsoft.com/" target="_blank" rel="noopener noreferrer">Open Copilot</a>
+          </div>
+          <p class="small">Review anything AI suggests before using it. Do not add experiences, skills, accomplishments, or results that are not true.</p>
+          <div class="status" id="status" role="status"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn back" type="button">Back</button>
+        <button class="btn" id="resetBtn" type="button">Start over</button>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<script>
+const steps = [...document.querySelectorAll('.step')];
+let current = 0;
+
+const shaped = document.getElementById('shaped');
+const future = document.getElementById('future');
+const evidence = document.getElementById('evidence');
+const skills = document.getElementById('skills');
+const why = document.getElementById('why');
+const draft = document.getElementById('draft');
+const bar = document.getElementById('bar');
+const progressText = document.getElementById('progressText');
+const progress = document.querySelector('.progress');
+const status = document.getElementById('status');
+
+function clean(value){
+  return (value || '').trim().replace(/\s+/g,' ');
+}
+function sentence(value){
+  let s = clean(value);
+  if(!s) return '';
+  s = s.charAt(0).toUpperCase() + s.slice(1);
+  if(!/[.!?]$/.test(s)) s += '.';
+  return s;
+}
+function lowerFirst(value){
+  const s = clean(value);
+  if(!s) return '';
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+function selectedPath(){
+  const checked = document.querySelector('input[name="storyPath"]:checked');
+  return checked ? checked.value : '';
+}
+
+function emphasizePath(){
+  const path = selectedPath();
+  document.querySelectorAll('.prompt-card').forEach(card=>{
+    const paths = card.dataset.path.split(' ');
+    card.classList.toggle('recommended', path && paths.includes(path));
+  });
+}
+
+function buildDraft(){
+  const path = selectedPath();
+  const s = sentence(shaped.value);
+  const f = sentence(future.value);
+  const ev = sentence(evidence.value);
+  const sk = clean(skills.value);
+  const w = sentence(why.value);
+
+  const pieces = [];
+
+  // Lead with the student's chosen story direction when possible.
+  if(path === 'shaped'){
+    if(s) pieces.push(s);
+    if(ev) pieces.push(ev);
+    if(sk) pieces.push(`Through these experiences, I have developed ${lowerFirst(sk)}.`);
+    if(w) pieces.push(w);
+    if(f) pieces.push(f);
+  } else if(path === 'future'){
+    if(f) pieces.push(f);
+    if(w) pieces.push(w);
+    if(ev) pieces.push(ev);
+    if(sk) pieces.push(`I bring experience with ${lowerFirst(sk)}.`);
+    if(s) pieces.push(s);
+  } else {
+    if(s) pieces.push(s);
+    if(f) pieces.push(f);
+    if(ev) pieces.push(ev);
+    if(sk) pieces.push(`Along the way, I have developed ${lowerFirst(sk)}.`);
+    if(w) pieces.push(w);
+  }
+
+  // If no path was selected, still use any content they chose to provide.
+  if(!path){
+    [s,f,ev].forEach(x=>{ if(x) pieces.push(x); });
+    if(sk) pieces.push(`Some of the strengths I bring include ${lowerFirst(sk)}.`);
+    if(w) pieces.push(w);
+  }
+
+  const text = [...new Set(pieces)].join(' ');
+  draft.textContent = text || 'Add at least one idea in the previous step to build your draft.';
+  draft.classList.toggle('empty', !text);
+  show(2);
+}
+
+document.querySelectorAll('.next').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(current===0) emphasizePath();
+    show(current+1);
+  });
+});
+document.querySelectorAll('input[name="storyPath"]').forEach(radio=>{
+  radio.addEventListener('change', emphasizePath);
+});
+document.querySelectorAll('.back').forEach(btn=>{
+  btn.addEventListener('click',()=>show(current-1));
+});
+document.getElementById('buildBtn').addEventListener('click',buildDraft);
+
+document.getElementById('copyDraft').addEventListener('click', async ()=>{
+  const text = draft.innerText.trim();
+  if(!text || draft.classList.contains('empty')){
+    status.textContent = 'Add some details before copying your draft.';
+    return;
+  }
+  try{
+    await navigator.clipboard.writeText(text);
+    status.textContent = 'Draft copied!';
+  }catch{
+    status.textContent = 'Copy was blocked. Select and copy the draft above.';
+  }
+});
+
+document.getElementById('copyCopilot').addEventListener('click', async ()=>{
+  const about = draft.innerText.trim();
+  if(!about || draft.classList.contains('empty')){
+    status.textContent = 'Build your draft first.';
+    return;
+  }
+
+  const prompt = `Help me improve the LinkedIn About section below.
+
+My goal: make it clearer, more specific, and easier to read while keeping my meaning and natural voice.
+
+Please:
+- keep it professional but conversational
+- keep it concise enough for LinkedIn
+- preserve the facts and experiences I provided
+- do not invent skills, accomplishments, numbers, roles, or results
+- avoid generic buzzwords and overly polished language
+- keep the strongest professional story or direction at the center
+- do not force me to cover both my past and future if my draft works better focusing on one
+- keep specific evidence when it strengthens the story
+- make my motivation or professional direction clear when it is already present
+- if something is too vague, point out 1–2 places where I could add a more specific detail rather than making one up for me
+
+Return:
+1. an improved version
+2. 2–3 brief notes explaining the most useful changes
+
+My current draft:
+${about}`;
+
+  try{
+    await navigator.clipboard.writeText(prompt);
+    status.textContent = 'Copilot prompt copied! Open Copilot and paste it in.';
+  }catch{
+    status.textContent = 'Copy was blocked. Copy your draft manually and use it with Copilot.';
+  }
+});
+
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  [shaped,future,evidence,skills,why].forEach(el=>el.value='');
+  document.querySelectorAll('input[name="storyPath"]').forEach(r=>r.checked=false);
+  document.querySelectorAll('.prompt-card').forEach(card=>card.classList.remove('recommended'));
+  draft.textContent='';
+  draft.classList.remove('empty');
+  status.textContent='';
+  show(0);
+});
+</script>
+</body>
+</html>
