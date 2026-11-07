@@ -17,13 +17,11 @@
     .skip{position:absolute;left:-9999px;top:8px;padding:10px 15px;background:#fff;border:2px solid #222;z-index:10}
     .skip:focus{left:8px}
     .shell{max-width:1010px;margin:0 auto;padding:32px 24px 56px}
-    .eyebrow{font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#606b75;margin:0 0 8px}
     h1{font-size:clamp(1.9rem,4.5vw,2.65rem);letter-spacing:-.035em;line-height:1.12;margin:0 0 11px}
     h2{font-size:1.53rem;line-height:1.23;letter-spacing:-.02em;margin:0 0 10px}
     h3{font-size:1.05rem;margin:0 0 8px}
     p{margin:0 0 15px}
-    .intro{max-width:780px;color:var(--muted);font-size:1.04rem;margin:0 0 11px}
-    .privacy{font-size:.82rem;color:#637080;margin:0 0 26px}
+    .intro{max-width:780px;color:var(--muted);font-size:1.04rem;margin:0 0 26px}
     .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:0 0 20px}
     .tab{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:12px;background:#fff;color:#43505e;text-align:left;padding:12px 14px;font-weight:700;font-size:.89rem}
     .tab:hover{background:#f6f7f9}
@@ -100,17 +98,15 @@
     .source{color:#6b7680;font-size:.79rem;line-height:1.5;margin:24px 0 0}
     @media(max-width:720px){.shell{padding:22px 15px 40px}.panel{padding:19px 16px}.tabs{gap:6px}.tab{padding:9px 8px;font-size:.78rem;gap:6px}.num{width:22px;height:22px;font-size:.72rem}.grid2,.choices,.compare-body,.compare-body.three,.addon-grid{grid-template-columns:1fr}.choice{min-height:auto}.footer{align-items:stretch}.footer .btn{flex:1}.secondary-actions{flex-direction:column}}
     @media(max-width:430px){.tab{flex-direction:column;align-items:flex-start;gap:5px;font-size:.75rem;line-height:1.2}.footer{flex-wrap:wrap}.footer .btn{min-width:40%}.actions .btn{flex:1}}
-    @media print{.tabs,.footer,.secondary-actions,.actions,.prompt-preview,.privacy,.source,.callout,.ai-note{display:none!important}.panel{box-shadow:none;border:0;padding:0}.shell{max-width:none}.preview{border:0;padding:0}.preview textarea,.finish textarea{border:0;height:auto;min-height:0}body{font-size:11pt}}
+    @media print{.tabs,.footer,.secondary-actions,.actions,.prompt-preview,.source,.callout,.ai-note{display:none!important}.panel{box-shadow:none;border:0;padding:0}.shell{max-width:none}.preview{border:0;padding:0}.preview textarea,.finish textarea{border:0;height:auto;min-height:0}body{font-size:11pt}}
   </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to tool</a>
   <div class="shell">
     <header>
-      <p class="eyebrow">LinkedIn quick tool</p>
       <h1>Build Your LinkedIn About Section</h1>
       <p class="intro">Write a LinkedIn About section that sounds like you. You might focus on what motivates you, your background, your skills, or a mix of these. A few meaningful sentences can be enough.</p>
-      <p class="privacy">No login required. This tool works in your browser and does not send your writing anywhere. Copying your draft into an AI service is your choice.</p>
     </header>
 
     <nav class="tabs" aria-label="Quick tool steps">
@@ -200,6 +196,7 @@
           <label class="mini" for="draft">Edit your About section directly</label>
           <textarea id="draft" data-field="draft" rows="11" placeholder="Your About section will appear here. You can also write or paste your own."></textarea>
           <div class="actions" style="margin-top:12px"><button class="btn" id="copyDraft" type="button">Copy About</button><button class="btn" id="rebuild" type="button">Rebuild from my answers</button></div>
+          <p class="support"><strong>How long should it be?</strong> Around 75–150 words is a useful starting point, but it's not a requirement. A few specific, meaningful sentences are enough if they say what you want to share. If you write more, break it into short paragraphs so it's easy to read.</p>
           <p class="support">Read it aloud. Does it sound like you, and does it give someone a clear sense of what you wanted to share? Remove anything that feels forced or overly generic.</p>
         </div>
         <details class="example-compare" style="margin-top:18px"><summary>Want to add more detail? (Optional ideas)</summary>
